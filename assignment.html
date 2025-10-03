@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            margin-bottom: 10px;
+            display: inline-block;
+            text-align: left;
+        }
+        
+    </style>
+</head>
+<body style="margin: 0; padding: 20px;">
+    <div style="display: flex; height: 100%; width: 100%;">
+        <div style="width: 50%; background-color: antiquewhite;">
+            <div style="display: flex; justify-content: space-between; padding:30px 40px 30px 40px;">
+                <img src="aaa.jpg" alt="" style="height: 270px; width: 270px; border-radius: 100%; border: 7px white solid;">
+                <div style="text-align: left; margin-top: 7%; margin-right: 5%;">
+                    <h1 id="displayname">Name</h1>
+                    <h2 id="displayClass">Class</h2>
+                </div>
+            </div>
+            <div style="padding: 10px 0px 0px 40px;"> 
+                <h1>Programming Skills:</h1>
+                <ul style="list-style-type: square; font-size: 20px;">
+                    <li class="skillA"></li>
+                    <li class="skillB"></li>
+                    <li class="skillC"></li>
+                </ul>
+            </div>
+        </div>
+        <div style="width: 50%; background-color:cornsilk; text-align: center; padding-top: 50px;">
+            <h1>CARD DETAILS</h1>
+            <form action="" id="details"  style="padding-top: 30px; font-size: 20px;">
+                <label for="name">Your name</label>
+                <input type="text" id="name" ><br>
+                <label for="class">Your Class</label>
+                <input type="text" id="class"><br>
+                <label for="skills" id="aa" style="margin-top: 30px;">Programming Skills:</label>
+                <br>
+                <input type="text" name="" id="skillA"><br>
+                <input type="text" name="" id="skillB"><br>
+                <input type="text" name="" id="skillC"><br>
+                
+                <input type="submit" value="Submit" style="margin-top: 30px; font-size: 20px; padding: 5px 15px 5px 15px; border-radius: 10px; background-color: rgb(48, 93, 198); color: white; border: none; cursor: pointer; align-items: center;">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function getDetails(event){
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const className = document.getElementById('class').value;
+            const skillA = document.getElementById('skillA').value;
+            const skillB = document.getElementById('skillB').value;
+            const skillC = document.getElementById('skillC').value;
+
+            document.getElementById('displayname').innerText = name;
+            document.getElementById('displayClass').innerText = className;
+            document.querySelector('.skillA').innerText = skillA;
+            document.querySelector('.skillB').innerText = skillB;
+            document.querySelector('.skillC').innerText = skillC;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('details').addEventListener('submit', getDetails);
+        });
+    </script>
+</body>
+</html>

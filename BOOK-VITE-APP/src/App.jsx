@@ -41,7 +41,7 @@ function App() {
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book) => (
             <div key={book.id} className="book-card shadow-md rounded-xl p-4 bg-white border hover:shadow-lg transition">
-              <img src={`https://picsum.photos/seed/${book.id}/200/250`} alt={book.title} className="w-full h-48 object-cover rounded-md mb-4" />
+              <img src={`https://picsum.photos/seed/${book.id}/200/250`} alt={book.title} className="w-[200px] h-48 object-cover rounded-md mb-4" />
               <h2 className="text-lg font-semibold text-gray-800">{book.title}</h2>
               <p className="text-sm text-gray-500 mt-1">{book.author}</p>
               <p className="text-blue-600 font-bold mt-2">₹{book.price}</p>

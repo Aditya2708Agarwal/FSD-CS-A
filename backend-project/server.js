@@ -1,43 +1,53 @@
-import http from 'http'
-import os, { platform } from 'os'
+import http from 'http';
+import os from 'os';
 
-let body =undefined;
-const data =[];
-const server = http.createServer((req,res)=>{
+const port = 5001;
+
+const server = http.createServer((req, res) => {
     const url = req.url;
-    if(url=='/' && req.method=='GET') res.end("<h1> This is Home Page</h1>");
-    else if(url=='/contact' && req.method=='GET') res.end("<h1> This is Contact Page</h1>"); 
-    else if(url=='/about' && req.method=='GET') res.end("<h1> This is About Page</h1>"); 
-    else if(url=='/system' && req.method=='GET'){
-        const sysData={
-            platform: os.platform(),
-            arch: os.arch(),
-            cpu: os.cpus().length,
-            totalMemory: (os.totalmem()/1024**3).toFixed(2)+" GB",
-            freeMemory: (os.freemem()/1024**3).toFixed(2)+" GB"
-        }
-        res.setHeader("Content-Type","application/json");
-        res.end(JSON.stringify(sysData))
-    } 
-    else if(url=='/viewdata' && req.method=='GET') res.end(body); 
-    else if(url=='/sendata' && req.method=='POST') {
-        req.on("data",(chunk)=>{
-            body=body+chunk;
-        })
-        req.on("end",()=>{
-            console.log(body,"send data")
-            data.push(body)
-            res.statusCode=201
-            res.end(JSON.stringify(data)); 
-        })
+    const method = req.method;
+
+    if (url === '/' && method === 'GET') {
+        res.write("Home Page");
+        res.end();
     }
-    else{
-        res.statusCode=404;
-        res.end("<h1>Error Page</h1>")
+    else if (url === '/contact' && method === 'GET') {
+        res.write("Contact Page");
+        res.end();
+    }
+    else if (url === '/system' && method === 'GET') {
+        const sysdata = {
+            operstingSystem: os.platform(),
+            Architecture: os.arch(),
+            cpuLength: os.cpus().length,
+            TotalMemory: (os.totalmem()/1024**3).toFixed(2) + "GB",
+            FreeMemory: (os.freemem()/1024**3).toFixed(2) + "GB",
+            // network : os.networkInterfaces()
+        }
+        res.write(JSON.stringify(sysdata));
+        res.end();
+    }
+    else if (url === '/createuser' && method === 'POST') {
+        res.write("Create User");
+        res.end();
+    }
+    else if (url.startsWith("/users/") && method === 'GET') {
+        res.write("Search User");
+        res.end();
+    }
+    else if (url.startsWith("/users/") && method === 'PUT') {
+        res.write("Update User");
+        res.end();
+    }
+    else if (url.startsWith("/users/") && method === 'DELETE') {
+        res.write("Delete User");
+        res.end();
+    }
+    else {
+        res.write("Error Page");
+        res.end();
     }
 })
-
-const port = 4001
-server.listen(port,(req,res)=>{
-    console.log(`Server is listening on port no. ${port}`)
+server.listen(port, () => {
+    console.log(`server is running on port ${port}`);
 })
